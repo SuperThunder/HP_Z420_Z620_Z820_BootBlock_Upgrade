@@ -1,0 +1,50 @@
+Testing with BIOS v3.85, ME v7, 2013 boot block:
+
+E5 2603 v2 with ME v7, AMT disabled by header and in BIOS: Works
+
+E5 2603 v2 with ME v7, AMT disabled in BIOS: Works
+
+E5 2603 v2 with ME v7, AMT enabled in BIOS: Does not work, bootloop
+
+E5 2603 v2 with ME v7, AMT enabled in BIOS but disabled by header: Works again
+-> ME not shown in "system information" (as its disabled)
+-> but AMT can be disabled again
+-> AMT disabled, reboot with header in normal place, works again
+
+
+Attempting upgrades:
+ - fwuplcl64 on linux, flashing include ME v8 blob (sp82684 tools):
+	- couldn't flash or read with flashrom with BB and AMT headers in normal mode
+	- BB/AMT headers switched on, xubuntu:
+		- flashrom dump has different shasum...?
+		- fwupdlclme8 doesnt seem to work with amt disabled in bios (linux64)
+		- Doesn't work with AMT enabled either 
+		- flashrom has different shasum again, although consistent on a given boot, inconsistent between boots
+		- flashrom attempt in xubuntu live failed, caused change of shasum from dump. Still able to boot to BIOS.
+		- flashrom in proxmox doesn't segfault which is nice
+		- however it still has block erase failures
+			- but recognizes no changes occured
+
+
+	- BB/AMT headers switched on, FreeDOS:
+		- wasn't able to use FPT or meflash or meinfo
+		- similar type errors to flashrom
+		- something extra to do beyond E14 and ME/AMT header?
+
+
+	- Pi3 + clamp SPI flash
+		- took many clamp tries as usual
+		- flashed
+		- had to boot with ME disabled, enable AMT, 'unconfigure'
+		- not sure if it worked with ME on for the v2 CPU but did boot with v1 CPU and ME v8
+		- Flashed a dumped BIOS (with the ME region replaced with the v8 one from the v3.85 update .bin with UEFITool)
+
+
+
+
+After upgrade ME block to v8:
+	- v1 CPU still works
+	- v2 still worked with ME/AMT override
+	- possibly some ME reconfiguration or reset required to get it working with v2 CPU (PCH gets confused?)
+
+
