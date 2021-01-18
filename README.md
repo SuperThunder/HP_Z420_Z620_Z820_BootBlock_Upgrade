@@ -6,3 +6,7 @@ See the PDF in this repository for the guide, and feel free to post issues!
 Related forum threads:
 https://forum.level1techs.com/t/need-help-modding-bios-bin-file-never-done-this-before/131757/28
 https://h30434.www3.hp.com/t5/Business-PCs-Workstations-and-Point-of-Sale-Systems/Z820-e5-2600-v2-ivy-bridge-upgrade-thread-reactivation/td-p/6886145
+
+
+# Software flash note IMPORTANT
+## At present it is NOT POSSIBLE to flash the boot block through software only - it appears there are additional protections while the workstation is on that prevent flashing the boot block. You must use the hardware programmer method to update your boot block.
